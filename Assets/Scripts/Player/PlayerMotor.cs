@@ -8,8 +8,9 @@ public class PlayerMotor : MonoBehaviour
     private bool isGrounded;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
-    public float speed = 5f;
+    public float defaultSpeed = 5f;
     public float sprintSpeed = 8f;
+    private float speed;
 
 
     bool crouching = false;
@@ -20,6 +21,7 @@ public class PlayerMotor : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        speed = defaultSpeed;
     }
 
 
@@ -63,14 +65,20 @@ public class PlayerMotor : MonoBehaviour
     }
 
 
-    public void Crouch()
+    public void Crouch_Toggle()
     {
         crouching = !crouching;
         crouchTimer = 0;
         lerpCrouch = true;
     }
+    public void Crouch_Hold(bool crouching)
+    {
+        this.crouching = crouching;
+        crouchTimer = 0;
+        lerpCrouch = true;
+    }
 
-    public void Sprint()
+    public void Sprint_Toggle()
     {
         sprinting = !sprinting;
         if (sprinting)
@@ -78,6 +86,12 @@ public class PlayerMotor : MonoBehaviour
         else
             speed = 5;
     }
+
+    public void Sprint_Hold(bool isSprinting)
+    {
+        speed = isSprinting ? sprintSpeed : 5;
+    }
+
 
 
     public void Jump()

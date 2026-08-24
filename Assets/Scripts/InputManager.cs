@@ -15,6 +15,7 @@ public class InputManager : MonoBehaviour
         onFoot = playerInput.OnFoot;
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
+
         // some weird ass code here:
         onFoot.Jump.performed += ctx => motor.Jump(); // calls the motor.jump() method when jump is performed.
         // we also have:
@@ -22,8 +23,10 @@ public class InputManager : MonoBehaviour
         //         .canceled
 
 
-        onFoot.Crouch.performed += ctx => motor.Crouch();
-        onFoot.Sprint.performed += ctx => motor.Sprint();
+        onFoot.Crouch.performed += ctx => motor.Crouch_Hold(true);
+        onFoot.Crouch.canceled += ctx => motor.Crouch_Hold(false);
+        onFoot.Sprint.performed += ctx => motor.Sprint_Hold(true);
+        onFoot.Sprint.canceled += ctx => motor.Sprint_Hold(false);
 
     }
 

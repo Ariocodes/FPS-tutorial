@@ -3,17 +3,21 @@ using UnityEngine.InputSystem;
 
 public class Keypad : Interactable
 {
-    [SerializeField]
     private InputManager inputManager;
     [SerializeField]
     private GameObject door;
     private bool doorOpen;
     private Animator doorAnimator;
 
+    [SerializeField]
+    private GameObject button;
+    private Animator buttonAnimator;
+
     private void Awake()
     {
         inputManager = FindAnyObjectByType<InputManager>();
         doorAnimator = door.GetComponent<Animator>();
+        buttonAnimator = button.GetComponent<Animator>();
     }
 
     private void Start()
@@ -24,8 +28,12 @@ public class Keypad : Interactable
 
     protected override void Interact()
     {
-        doorOpen = !doorOpen;
-        doorAnimator.SetBool("isOpen", doorOpen);
-        Debug.Log("Interacted with " + gameObject.name);
+        if(buttonAnimator.GetCurrentAnimatorStateInfo(0).IsName("Default") && !buttonAnimator.IsInTransition(0))
+        {
+            buttonAnimator.SetTrigger("isPressed");
+            doorOpen = !doorOpen;
+            doorAnimator.SetBool("isOpen", doorOpen);
+            Debug.Log("Interacted with " + gameObject.name);
+        }
     }
 }
