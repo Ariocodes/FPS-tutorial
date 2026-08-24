@@ -1,0 +1,48 @@
+using Unity.Jobs;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+
+public class PlayerInteract : MonoBehaviour
+{
+    private Camera cam;
+    [SerializeField]
+    private float distance = 3f;
+    [SerializeField]
+    private LayerMask mask;
+    private PlayerUI playerUI;
+    private InputManager inputManager;
+
+
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        cam = GetComponent<PlayerLook>().cam;
+        playerUI = GetComponent<PlayerUI>();
+        inputManager = GetComponent<InputManager>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        playerUI.UpdateText(string.Empty);
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+        Debug.DrawRay(ray.origin, ray.direction * distance);
+        RaycastHit hitInfo; // variable to store our collision information
+
+        //This statement will become true in case of a collision.
+        if (Physics.Raycast(ray, out hitInfo, distance, mask)) // "out" means the function is going to return something into hitInfo.
+        {
+            if(hitInfo.collider.GetComponent<Interactable>() != null)
+            {
+                Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+                playerUI.UpdateText(interactable.promptMessage);
+                if (inputManager.onFoot.Interact.triggered)
+                {
+                    interactable.BaseInteract();
+                }
+            }
+        } 
+    }
+}
