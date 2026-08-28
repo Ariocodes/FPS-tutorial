@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-
     public BaseState activeState;
     public PatrolState patrolState;
 
@@ -13,12 +12,7 @@ public class StateMachine : MonoBehaviour
         ChangeState(patrolState);
     }
 
-
-    void Start()
-    {
-        
-    }
-
+    void Start() { }
     void Update()
     {
         if(activeState != null)
