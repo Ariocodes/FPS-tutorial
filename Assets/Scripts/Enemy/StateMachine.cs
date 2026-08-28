@@ -4,12 +4,13 @@ public class StateMachine : MonoBehaviour
 {
 
     public BaseState activeState;
-    // property for the patrol state
+    public PatrolState patrolState;
 
 
     public void Initialize()
     {
-        // setup default state.
+        patrolState = new PatrolState();
+        ChangeState(patrolState);
     }
 
 
@@ -41,7 +42,7 @@ public class StateMachine : MonoBehaviour
         {
             // setup new state.
             activeState.stateMachine = this;
-            // assign state enemy class
+            activeState.enemy = GetComponent<Enemy>();
             activeState.Enter();
         }
     }

@@ -2,23 +2,39 @@ using UnityEngine;
 
 public class PatrolState : BaseState
 {
-    public override void Enter()
-    {
-        
-    }
+    // track the waypoint we are targeting currently.
+    public int waypointIndex;
+    public float waitTimer = 4;
+
+
+    public override void Enter() { }
 
     public override void Perform()
     {
-        
+        PatrolCycle();
     }
+    public override void Exit() { }
 
-    public override void Exit() 
-    { 
-    
-    }
 
     public void PatrolCycle()
     {
-        // implement patrol logic
+        if (enemy.Agent.remainingDistance < 0.2f)
+        {
+            waitTimer += Time.deltaTime;
+            if(waitTimer > 3)
+            {
+                if (waypointIndex < enemy.path.waypoints.Count - 1)
+                {
+                    waypointIndex++;
+                }
+                else
+                {
+                    waypointIndex = 0;
+                }
+                enemy.Agent.SetDestination(enemy.path.waypoints[waypointIndex].position);
+                waitTimer = 0; // resetting the timer after we set the destination
+            }
+
+        }
     }
 }
