@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
     {
         UpdateMovementAnimation();
         CanSeePlayer();
+        currentState = stateMachine.activeState.ToString();
     }
     // updating animation from idle to walking based on enemy movement.
     public void UpdateMovementAnimation()
