@@ -8,8 +8,6 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent Agent { get => agent; }
     public Path path;
 
-
-
     // animations
     public Animator legAnimator;
     public Animator armAnimator;
@@ -18,6 +16,10 @@ public class Enemy : MonoBehaviour
     // ONLY FOR DEBUGGING PURPOSES
     [SerializeField]
     private string currentState;
+    private GameObject player;
+    public float sightDistance = 20f;
+    public float fieldOfView = 85f;
+    public float eyeHeight;
 
 
     void Start()
@@ -25,16 +27,15 @@ public class Enemy : MonoBehaviour
         stateMachine = GetComponent<StateMachine>();
         agent = GetComponent<NavMeshAgent>();
         stateMachine.Initialize();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
-
 
 
     void Update()
     {
         UpdateMovementAnimation();
+        CanSeePlayer();
     }
-
-
     // updating animation from idle to walking based on enemy movement.
     public void UpdateMovementAnimation()
     {
@@ -45,6 +46,48 @@ public class Enemy : MonoBehaviour
             armAnimator.Play(isMoving ? "armsAnimation" : "Idle");
             wasMoving = isMoving;
         }
-        
     }
+
+    public bool CanSeePlayer()
+    {
+        if(player != null)
+        {
+            // is the player close enough to be seen?
+            if (Vector3.Distance(transform.position, player.transform.position) < sightDistance)
+            {
+                Vector3 targetDirection = player.transform.position - transform.position - (Vector3.up * eyeHeight);
+                float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
+                // is the player within the field of view of enemy?
+                if (angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
+                {
+                    Ray ray = new Ray(transform.position + (Vector3.up * eyeHeight), targetDirection);
+                    Debug.DrawRay(ray.origin, ray.direction * sightDistance);
+
+
+
+                    RaycastHit hitInfo = new RaycastHit();
+
+                    // is enemy's sight blocked by any object?
+                    if (Physics.Raycast(ray, out hitInfo, sightDistance))
+                    {
+                        if (hitInfo.transform.gameObject == player)
+                        {
+                            return true;
+                        }
+                    }
+
+
+
+                }
+            }
+        }
+
+
+
+        return false;
+    }
+
+
+
+
 }

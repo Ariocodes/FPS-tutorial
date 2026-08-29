@@ -1395,6 +1395,9 @@ MonoBehaviour:
   legAnimator: {fileID: 1083580959}
   armAnimator: {fileID: 108182042}
   currentState: 
+  sightDistance: 20
+  fieldOfView: 85
+  eyeHeight: 0.3
 --- !u!114 &319215927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3485,7 +3488,7 @@ Transform:
   m_GameObject: {fileID: 659687630}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -7.45, y: 1.94, z: -2.9}
+  m_LocalPosition: {x: -7.45, y: 1.053, z: -2.9}
   m_LocalScale: {x: 0.9, y: 1, z: 0.55}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3511,6 +3514,9 @@ MonoBehaviour:
   legAnimator: {fileID: 361234078}
   armAnimator: {fileID: 218854639}
   currentState: 
+  sightDistance: 20
+  fieldOfView: 85
+  eyeHeight: 0.3
 --- !u!114 &659687633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8480,7 +8486,7 @@ Transform:
   m_GameObject: {fileID: 1849300383}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -5.26, y: 2.3300002, z: -18.7}
+  m_LocalPosition: {x: -5.26, y: 1.241, z: -18.7}
   m_LocalScale: {x: 0.9, y: 1, z: 0.55}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8506,6 +8512,9 @@ MonoBehaviour:
   legAnimator: {fileID: 1943331998}
   armAnimator: {fileID: 983492182}
   currentState: 
+  sightDistance: 20
+  fieldOfView: 85
+  eyeHeight: 0.3
 --- !u!114 &1849300386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9559,6 +9568,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5639040523996028852, guid: cdc9d6b9c0bdf4542ac2739b3543a940, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639040523996028852, guid: cdc9d6b9c0bdf4542ac2739b3543a940, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
