@@ -64,7 +64,6 @@ public class PlayerMotor : MonoBehaviour
         //Debug.Log(playerVelocity.y);
     }
 
-
     public void Crouch_Toggle()
     {
         crouching = !crouching;
@@ -92,8 +91,6 @@ public class PlayerMotor : MonoBehaviour
         speed = isSprinting ? sprintSpeed : 5;
     }
 
-
-
     public void Jump()
     {
         if (isGrounded)
@@ -101,4 +98,9 @@ public class PlayerMotor : MonoBehaviour
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
     }
+
+
+
+
+    
 }

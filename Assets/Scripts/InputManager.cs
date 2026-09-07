@@ -22,7 +22,6 @@ public class InputManager : MonoBehaviour
         //         .started
         //         .canceled
 
-
         onFoot.Crouch.performed += ctx => motor.Crouch_Hold(true);
         onFoot.Crouch.canceled += ctx => motor.Crouch_Hold(false);
         onFoot.Sprint.performed += ctx => motor.Sprint_Hold(true);
