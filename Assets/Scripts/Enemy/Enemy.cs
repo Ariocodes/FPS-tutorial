@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     public Transform gunBarrel;
     [Range(0.1f, 10f)]
     public float fireRate;
+    public float bulletSpeed;
 
 
 
