@@ -70,6 +70,7 @@ public class PlayerMotor : MonoBehaviour
         crouchTimer = 0;
         lerpCrouch = true;
     }
+    
     public void Crouch_Hold(bool crouching)
     {
         this.crouching = crouching;
@@ -101,6 +102,4 @@ public class PlayerMotor : MonoBehaviour
 
 
 
-
-    
 }

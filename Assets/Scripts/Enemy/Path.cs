@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEditor;
 public class Path : MonoBehaviour
 {
-
     public List<Transform> waypoints;
     [SerializeField]
     private bool alwaysDrawPath;
@@ -21,6 +20,7 @@ public class Path : MonoBehaviour
             DrawPath();
         }
     }
+
     public void DrawPath()
     {
         for (int i = 0; i < waypoints.Count; i++)
@@ -42,6 +42,7 @@ public class Path : MonoBehaviour
             }
         }
     }
+
     public void OnDrawGizmosSelected()
     {
         if (alwaysDrawPath)
@@ -49,4 +50,8 @@ public class Path : MonoBehaviour
         else
             DrawPath();
     }
+
+
+
+    
 }

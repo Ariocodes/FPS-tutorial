@@ -8,7 +8,6 @@ public class InputManager : MonoBehaviour
     private PlayerMotor motor;
     private PlayerLook look;
 
-
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -26,7 +25,6 @@ public class InputManager : MonoBehaviour
         onFoot.Crouch.canceled += ctx => motor.Crouch_Hold(false);
         onFoot.Sprint.performed += ctx => motor.Sprint_Hold(true);
         onFoot.Sprint.canceled += ctx => motor.Sprint_Hold(false);
-
     }
 
     void FixedUpdate()
@@ -45,6 +43,7 @@ public class InputManager : MonoBehaviour
         // I guess just some method to switch between different input modes.
         onFoot.Enable();
     }
+    
     private void OnDisable()
     {
         onFoot.Disable();
