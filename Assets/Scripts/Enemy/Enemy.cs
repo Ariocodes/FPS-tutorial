@@ -6,18 +6,20 @@ public class Enemy : MonoBehaviour
     private StateMachine stateMachine;
     private NavMeshAgent agent;
     private GameObject player;
+    private Vector3 lastKnownPlayerPosition;
     private bool wasMoving;
+
 
     [Header("AI Navigation")]
     public NavMeshAgent Agent { get => agent; }
     public Path path;
-
     public GameObject Player {  get => player; }
+    public Vector3 LastKnownPlayerPosition { get => lastKnownPlayerPosition; set => lastKnownPlayerPosition = value; }
+
 
     // animations
     public Animator legAnimator;
     public Animator armAnimator;
-
 
 
 
@@ -33,13 +35,15 @@ public class Enemy : MonoBehaviour
     public float bulletSpeed;
 
 
-
-
-
     // ONLY FOR DEBUGGING PURPOSES
     [SerializeField]
     [Header("DEBUGGING")]
     private string currentState;
+
+
+
+
+
 
     void Start()
     {
@@ -56,9 +60,6 @@ public class Enemy : MonoBehaviour
         CanSeePlayer();
         currentState = stateMachine.activeState.ToString();
     }
-
-
-
 
 
     // updating animation from idle to walking based on enemy movement.
