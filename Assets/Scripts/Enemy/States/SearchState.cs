@@ -15,7 +15,7 @@ public class SearchState : BaseState
         {
             stateMachine.ChangeState(new AttackState());
         }
-        if(enemy.Agent.remainingDistance < enemy.Agent.stoppingDistance)
+        if(enemy.Agent.remainingDistance < enemy.Agent.stoppingDistance * 10)
         {
             searchTimer += Time.deltaTime;
             if(searchTimer > enemy.losePlayerTime)
@@ -23,6 +23,7 @@ public class SearchState : BaseState
                 stateMachine.ChangeState(new PatrolState());
             }
         }
+      
     }
 
     public override void Exit()

@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     private bool wasMoving;
 
 
+    public GameObject debugSphere;
     [Header("AI Navigation")]
     public NavMeshAgent Agent { get => agent; }
     public Path path;
@@ -28,7 +29,7 @@ public class Enemy : MonoBehaviour
     public float fieldOfView = 85f;
     public float eyeHeight;
     [Range(0.1f, 20f)]
-    public float losePlayerTime = 10f;
+    public float losePlayerTime = 3f;
     [Header("Weapon Values")]
     public Transform gunBarrel;
     [Range(0.1f, 10f)]
@@ -61,6 +62,7 @@ public class Enemy : MonoBehaviour
         UpdateMovementAnimation();
         CanSeePlayer();
         currentState = stateMachine.activeState.ToString();
+        debugSphere.transform.position = lastKnownPlayerPosition;
     }
 
 
@@ -99,8 +101,6 @@ public class Enemy : MonoBehaviour
                     Ray ray = new Ray(transform.position + (Vector3.up * eyeHeight), targetDirection);
                     Debug.DrawRay(ray.origin, ray.direction * sightDistance);
 
-
-
                     RaycastHit hitInfo = new RaycastHit();
 
                     // is enemy's sight blocked by any object?
@@ -111,8 +111,6 @@ public class Enemy : MonoBehaviour
                             return true;
                         }
                     }
-
-
 
                 }
             }
