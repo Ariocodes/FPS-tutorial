@@ -28,11 +28,15 @@ public class Enemy : MonoBehaviour
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
     public float eyeHeight;
+
+
     [Header("SearchState Values")]
     [Range(1, 10)]
     public int searchPoints = 3;
     [Range(0.1f, 20f)]
     public float losePlayerTime = 3f;
+
+    
     [Header("Weapon Values")]
     public Transform gunBarrel;
     [Range(0.1f, 10f)]
@@ -118,9 +122,6 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-
-
-
         return false;
     }
 
