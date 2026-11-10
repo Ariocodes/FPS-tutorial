@@ -10,7 +10,6 @@ public class StateMachine : MonoBehaviour
         ChangeState(new PatrolState());
     }
 
-    void Start() { }
     void Update()
     {
         if(activeState != null)

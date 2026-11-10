@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     private Vector3 lastKnownPlayerPosition;
     private bool wasMoving;
 
-
     public GameObject debugSphere;
     [Header("AI Navigation")]
     public NavMeshAgent Agent { get => agent; }
@@ -17,18 +16,14 @@ public class Enemy : MonoBehaviour
     public GameObject Player {  get => player; }
     public Vector3 LastKnownPlayerPosition { get => lastKnownPlayerPosition; set => lastKnownPlayerPosition = value; }
 
-
     // animations
     public Animator legAnimator;
     public Animator armAnimator;
-
-
 
     [Header("Sight Values")]
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
     public float eyeHeight;
-
 
     [Header("SearchState Values")]
     [Range(1, 10)]
@@ -36,7 +31,6 @@ public class Enemy : MonoBehaviour
     [Range(0.1f, 20f)]
     public float losePlayerTime = 3f;
 
-    
     [Header("Weapon Values")]
     public Transform gunBarrel;
     [Range(0.1f, 10f)]
@@ -44,15 +38,10 @@ public class Enemy : MonoBehaviour
     [Range(0.1f, 1000f)]
     public float bulletSpeed;
 
-
     // ONLY FOR DEBUGGING PURPOSES
     [SerializeField]
     [Header("DEBUGGING")]
     private string currentState;
-
-
-
-
 
 
     void Start()
@@ -80,8 +69,6 @@ public class Enemy : MonoBehaviour
         if(isMoving != wasMoving)
         {
             legAnimator.Play(isMoving ? "legsAnimation" : "Idle");
-
-
             bool isAttacking = stateMachine.activeState is AttackState;
             bool isHolstering = armAnimator.GetCurrentAnimatorStateInfo(0).IsName("HolsterWeapon");
 
@@ -107,7 +94,6 @@ public class Enemy : MonoBehaviour
                 {
                     Ray ray = new Ray(transform.position + (Vector3.up * eyeHeight), targetDirection);
                     Debug.DrawRay(ray.origin, ray.direction * sightDistance);
-
                     RaycastHit hitInfo = new RaycastHit();
 
                     // is enemy's sight blocked by any object?
@@ -118,14 +104,9 @@ public class Enemy : MonoBehaviour
                             return true;
                         }
                     }
-
                 }
             }
         }
         return false;
     }
-
-
-
-
 }
