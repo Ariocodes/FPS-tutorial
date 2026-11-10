@@ -65,11 +65,17 @@ public class AttackState : BaseState
         // store reference to the gun barrel.
         Transform gunbarrel = enemy.gunBarrel;
 
+        // calculate direction (with spread) FIRST
+        Vector3 shootDirection = (enemy.Player.transform.position - gunbarrel.position).normalized;
+        shootDirection = Quaternion.AngleAxis(Random.Range(-3f, 3f), Vector3.up) * shootDirection;
+
+        // face the bullet along its travel direction, then lay the mesh down (Y axis -> Z axis)
+        Quaternion bulletRotation = Quaternion.LookRotation(shootDirection) * Quaternion.Euler(90f, 0f, 0f);
 
         // instantiate a new bullet.
-        GameObject bullet = GameObject.Instantiate(Resources.Load("Prefabs/Bullet") as GameObject, gunbarrel.position, enemy.transform.rotation);
-        // calculate the direction to the playyer.
-        Vector3 shootDirection = (enemy.Player.transform.position - gunbarrel.transform.position).normalized;
+        GameObject bullet = GameObject.Instantiate(Resources.Load("Prefabs/Bullet") as GameObject, gunbarrel.position, bulletRotation);
+        // // calculate the direction to the playyer.
+        // Vector3 shootDirection = (enemy.Player.transform.position - gunbarrel.transform.position).normalized;
         // add force to rigidbody of the bullet.
         bullet.GetComponent<Rigidbody>().linearVelocity = Quaternion.AngleAxis(Random.Range(-3f, 3f), Vector3.up) * shootDirection * enemy.bulletSpeed;
         Debug.Log("SHOOT");

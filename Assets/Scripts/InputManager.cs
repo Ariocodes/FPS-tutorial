@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour
         onFoot.Sprint.canceled += ctx => motor.Sprint_Hold(false);
     }
 
-    void FixedUpdate()
+    void Update() // no fixedUpdate because we don't want choppy camera effects
     {
         // tell the player motor to move using the value from our movement action.
         motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>()); // the ProcessMove function in PlayerMotor.cs is called with the given arguments
